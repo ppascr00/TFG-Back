@@ -36,19 +36,6 @@ node {
          currentBuild.result = 'FAILURE'
       throw err
    }
-   // ------------------------------------
-   // -- ETAPA: SonarQube
-   // ------------------------------------
-   stage 'SonarQube Analysis'
-   echo 'Análisis SonarQube'
-
-   def scannerHome = tool 'SonarQube'
-   withSonarQubeEnv('SonarQube'){
-      sh "${scannerHome}/bin/sonar-scanner \
-      -D sonar.projectKey=TeamFightTacticsSearch \
-      -D sonar.host.url=http://localhost:9000/"
-   }
-
 
 
    // ------------------------------------
@@ -64,4 +51,18 @@ node {
    stage 'Archivar'
    echo 'Archiva el paquete el paquete generado en Jenkins'
    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
+
+
+   // ------------------------------------
+   // -- ETAPA: SonarQube
+   // ------------------------------------
+   stage 'SonarQube Analysis'
+   echo 'Análisis SonarQube'
+
+   def scannerHome = tool 'SonarQube'
+   withSonarQubeEnv('SonarQube'){
+      sh "${scannerHome}/bin/sonar-scanner \
+      -D sonar.projectKey=TeamFightTacticsSearch \
+      -D sonar.host.url=http://localhost:9000/"
+   }
 }
