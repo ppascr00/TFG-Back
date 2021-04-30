@@ -36,6 +36,20 @@ node {
          currentBuild.result = 'FAILURE'
       throw err
    }
+   // ------------------------------------
+   // -- ETAPA: SonarQube
+   // ------------------------------------
+   stage 'SonarQube Analysis'
+   echo 'Análisis SonarQube'
+
+   def scannerHome = tool 'SonarQube Scanner'
+   withSonarQubeEnv('SonarQube Scanner'){
+      sh "${scannerHome}/bin/sonar-scanner \
+      -D sonar.projectKey = TeamFightTacticsSearch \
+      -D sonar.host.url=http://localhost:9000/"
+   }
+
+
 
    // ------------------------------------
    // -- ETAPA: Instalar
