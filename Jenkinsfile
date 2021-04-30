@@ -42,8 +42,8 @@ node {
    stage 'SonarQube Analysis'
    echo 'Análisis SonarQube'
 
-   def scannerHome = tool 'SonarQube Scanner'
-   withSonarQubeEnv('SonarQube Scanner'){
+   def scannerHome = tool 'SonarQube'
+   withSonarQubeEnv('SonarQube'){
       sh "${scannerHome}/bin/sonar-scanner \
       -D sonar.projectKey = TeamFightTacticsSearch \
       -D sonar.host.url=http://localhost:9000/"
