@@ -45,7 +45,7 @@ node {
    def scannerHome = tool 'SonarQube'
    withSonarQubeEnv('SonarQube'){
       sh "${scannerHome}/bin/sonar-scanner \
-      -D sonar.projectKey = TeamFightTacticsSearch \
+      -D sonar.projectKey=TeamFightTacticsSearch \
       -D sonar.host.url=http://localhost:9000/"
    }
 
