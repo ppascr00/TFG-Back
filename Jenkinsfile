@@ -65,7 +65,8 @@ node {
    withSonarQubeEnv('SonarQube'){
       sh "${scannerHome}/bin/sonar-scanner \
       -D sonar.projectKey=TeamFightTacticsSearch \
-      -D sonar.host.url=http://localhost:9000/"
+      -D sonar.host.url=http://localhost:9000/ \
+      -D sonar.java.binaries=./target/classes"
    }
 
 }
