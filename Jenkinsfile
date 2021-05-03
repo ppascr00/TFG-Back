@@ -37,18 +37,7 @@ node {
    //   throw err
    //}
 
-   // ------------------------------------
-   // -- ETAPA: SonarQube
-   // ------------------------------------
-   stage 'SonarQube Analysis'
-   echo 'Análisis SonarQube'
 
-   def scannerHome = tool 'SonarQube'
-   withSonarQubeEnv('SonarQube'){
-      sh "${scannerHome}/bin/sonar-scanner \
-      -D sonar.projectKey=TeamFightTacticsSearch \
-      -D sonar.host.url=http://localhost:9000/"
-   }
 
 
    // ------------------------------------
@@ -66,5 +55,17 @@ node {
    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
 
 
+   // ------------------------------------
+   // -- ETAPA: SonarQube
+   // ------------------------------------
+   stage 'SonarQube Analysis'
+   echo 'Análisis SonarQube'
+
+   def scannerHome = tool 'SonarQube'
+   withSonarQubeEnv('SonarQube'){
+      sh "${scannerHome}/bin/sonar-scanner \
+      -D sonar.projectKey=TeamFightTacticsSearch \
+      -D sonar.host.url=http://localhost:9000/"
+   }
 
 }
