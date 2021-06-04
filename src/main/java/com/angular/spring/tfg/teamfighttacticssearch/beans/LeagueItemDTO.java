@@ -129,4 +129,11 @@ public class LeagueItemDTO {
     public int hashCode() {
         return Objects.hash(freshBlood, wins, summonerName, miniSeries, inactive, veteran, hotStreak, rank, leaguePoints, losses, summonerId);
     }
+
+    @Override
+    public String toString() {
+        return "LeagueItemDTO{" +
+                "leaguePoints=" + leaguePoints +
+                '}';
+    }
 }
