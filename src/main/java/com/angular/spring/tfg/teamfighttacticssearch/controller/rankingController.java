@@ -38,6 +38,12 @@ public class rankingController {
         leagueItemDTO.addAll(leagueListDTOGrandmaster.getEntries());
         leagueItemDTO.addAll(leagueListDTOMaster.getEntries());
 
+        leagueItemDTO = orderLeagueItemDTO(leagueItemDTO);
+
+        return new ResponseEntity(leagueItemDTO, HttpStatus.OK);
+    }
+
+    private List<LeagueItemDTO> orderLeagueItemDTO(List<LeagueItemDTO> leagueItemDTO) {
         leagueItemDTO = leagueItemDTO.stream().sorted(new Comparator<LeagueItemDTO>() {
             @Override
             public int compare(LeagueItemDTO o1, LeagueItemDTO o2) {
@@ -51,7 +57,6 @@ public class rankingController {
             }
 
         }).collect(Collectors.toList());
-
-        return new ResponseEntity(leagueItemDTO, HttpStatus.OK);
+        return leagueItemDTO;
     }
 }
