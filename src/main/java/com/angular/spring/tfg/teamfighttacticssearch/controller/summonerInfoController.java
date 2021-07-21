@@ -1,6 +1,5 @@
 package com.angular.spring.tfg.teamfighttacticssearch.controller;
 
-import com.angular.spring.tfg.teamfighttacticssearch.beans.LeagueItemDTO;
 import com.angular.spring.tfg.teamfighttacticssearch.beans.MatchDTO;
 import com.angular.spring.tfg.teamfighttacticssearch.service.UserNameSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class summonerInfoController{
     @Autowired
     private UserNameSearchService userNameSearchService;
 
-    @GetMapping("/matches")
-    public ResponseEntity<List<MatchDTO>> get(@RequestParam(value = "platform") String platform, @RequestParam(value = "summonerName") String summonerName){
+    @PostMapping("/matches")
+    public ResponseEntity<List<MatchDTO>> getSummonerNameInfo(@RequestParam(value = "platform") String platform, @RequestParam(value = "summonerName") String summonerName){
         List<MatchDTO> listMatchesInfo = userNameSearchService.getSummonerInfo(platform, summonerName);
 
         return new ResponseEntity(listMatchesInfo, HttpStatus.OK);
