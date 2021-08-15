@@ -12,6 +12,7 @@
 	<artifactId>teamfighttacticssearch</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TeamfightTacticsSearch</name>
+	<packaging>war</packaging>
 	<description>Aplicación sencilla para realizar llamadas a la API de Riot sobre el juego Teamfight Tactics</description>
 	<properties>
 		<java.version>1.8</java.version>
