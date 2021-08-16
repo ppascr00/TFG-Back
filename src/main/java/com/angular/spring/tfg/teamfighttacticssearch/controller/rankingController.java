@@ -43,7 +43,7 @@ public class rankingController {
         return new ResponseEntity(leagueItemDTO, HttpStatus.OK);
     }
 
-    //prueba ejecución automática
+    //prueba ejecución automática 2
     private List<LeagueItemDTO> orderLeagueItemDTO(List<LeagueItemDTO> leagueItemDTO) {
         leagueItemDTO = leagueItemDTO.stream().sorted(new Comparator<LeagueItemDTO>() {
             @Override
