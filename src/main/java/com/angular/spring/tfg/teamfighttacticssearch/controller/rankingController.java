@@ -18,9 +18,6 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class rankingController {
 
-    @Value("${api.key}")
-    private String apiKey;
-
     @Autowired
     private RankingService rankingService;
 
@@ -29,10 +26,8 @@ public class rankingController {
     public ResponseEntity<List<LeagueItemDTO>> getChallengerList(@RequestParam(value = "platform") String platform){
 
         LeagueListDTO leagueListDTOChallenger = rankingService.getLeaderboard(platform, "challenger");
-        LeagueListDTO leagueListDTOGrandmaster = rankingService.getLeaderboard("euw1", "grandmaster");
-        LeagueListDTO leagueListDTOMaster = rankingService.getLeaderboard("euw1", "master");
-
-        //LeagueListDTO leagueListDTOLeaderboard = leagueListDTOChallenger + leagueListDTOGrandmaster + leagueListDTOMaster;
+        LeagueListDTO leagueListDTOGrandmaster = rankingService.getLeaderboard(platform, "grandmaster");
+        LeagueListDTO leagueListDTOMaster = rankingService.getLeaderboard(platform, "master");
 
         List<LeagueItemDTO> leagueItemDTO = leagueListDTOChallenger.getEntries();
         leagueItemDTO.addAll(leagueListDTOGrandmaster.getEntries());
@@ -44,19 +39,16 @@ public class rankingController {
     }
 
     private List<LeagueItemDTO> orderLeagueItemDTO(List<LeagueItemDTO> leagueItemDTO) {
-        leagueItemDTO = leagueItemDTO.stream().sorted(new Comparator<LeagueItemDTO>() {
-            @Override
-            public int compare(LeagueItemDTO o1, LeagueItemDTO o2) {
-                if(o1.getLeaguePoints() < o2.getLeaguePoints() /*? -1 : 1*/){
-                    return 1;
-                }else if(o1.getLeaguePoints() > o2.getLeaguePoints()){
-                    return -1;
-                }else{
-                    return o1.getSummonerName().compareTo(o2.getSummonerName());
-                }
+        leagueItemDTO = leagueItemDTO.stream().sorted((o1, o2) -> {
+            if(o1.getLeaguePoints() < o2.getLeaguePoints() /*? -1 : 1*/){
+                return 1;
+            }else if(o1.getLeaguePoints() > o2.getLeaguePoints()){
+                return -1;
+            }else{
+                return o1.getSummonerName().compareTo(o2.getSummonerName());
             }
-
         }).collect(Collectors.toList());
+        leagueItemDTO.removeIf(leagueItemDTO1 -> (leagueItemDTO1.getLeaguePoints()<400));
         return leagueItemDTO;
     }
 }
