@@ -20,7 +20,7 @@ node {
 
    // -- Compilando
    echo 'Compilando aplicación'
-   sh 'mvn clean package'
+   sh 'mvn clean test package'
 
    // ------------------------------------
    // -- ETAPA: Test
@@ -69,10 +69,10 @@ node {
 
    post {
       always {
-         sh 'cp tlt/target/tlt.war TOMCAT_DIRECTORY/webapps/'
+         sh 'cp target/teamfighttacticssearch.war TOMCAT_DIRECTORY/webapps/'
       }
       failure {
-         mail to: ppascr00@estudiantes.unileon.es, subject: 'The Pipeline failed :('
+         mail to: perico10fiera@gmail.com, subject: 'The Pipeline failed :('
       }
    }
 
