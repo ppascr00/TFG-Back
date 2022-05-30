@@ -56,25 +56,31 @@ node {
    // ------------------------------------
    // -- ETAPA: Instalar
    // ------------------------------------
-   stage 'Instalar'
-   echo 'Instala el paquete generado en el repositorio maven'
-   sh 'mvn install -Dmaven.test.skip=true'
+   //stage 'Instalar'
+   //echo 'Instala el paquete generado en el repositorio maven'
+   //sh 'mvn install -Dmaven.test.skip=true'
 
    // ------------------------------------
    // -- ETAPA: Archivar
    // ------------------------------------
-   stage 'Archivar'
-   echo 'Archiva el paquete el paquete generado en Jenkins'
-   step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
+   //stage 'Archivar'
+   //echo 'Archiva el paquete el paquete generado en Jenkins'
+   //step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
 
-   post {
+   // ------------------------------------
+   // -- ETAPA: Deploy war
+   // ------------------------------------
+   stage 'Deploy'
+   deploy adapters: [tomcat9(credentialsId: '5a41b19c-b032-4563-8c2d-0b4d2247ca4b', path: '', url: 'http://localhost:8081')], contextPath: 'springboot', war: 'target/teamfighttacticssearch.war'
+
+   /*post {
       always {
          sh 'cp target/teamfighttacticssearch.war TOMCAT_DIRECTORY/webapps/'
       }
       failure {
          mail subject: 'The Pipeline failed', to: 'perico10fiera@gmail.com'
       }
-   }
+   }*/
 
 
 }
