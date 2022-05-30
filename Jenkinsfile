@@ -71,7 +71,7 @@ node {
    // -- ETAPA: Deploy war
    // ------------------------------------
    stage 'Deploy'
-   deploy adapters: [tomcat9(credentialsId: '5a41b19c-b032-4563-8c2d-0b4d2247ca4b', path: '', url: 'http://localhost:8081')], contextPath: 'springboot', war: 'target/teamfighttacticssearch.war'
+   deploy adapters: [tomcat9(credentialsId: '5a41b19c-b032-4563-8c2d-0b4d2247ca4b', path: '', url: 'http://localhost:8081')], contextPath: '/', war: '**/*.war'
 
    /*post {
       always {
