@@ -72,7 +72,7 @@ node {
          sh 'cp target/teamfighttacticssearch.war TOMCAT_DIRECTORY/webapps/'
       }
       failure {
-         mail to: perico10fiera@gmail.com, subject: 'The Pipeline failed :('
+         mail subject: 'The Pipeline failed', to: 'perico10fiera@gmail.com'
       }
    }
 
