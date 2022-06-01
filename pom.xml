@@ -89,7 +89,7 @@
 							<outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${project.parent.basedir}/tutorial-web/src/main/web/dist/np-app/</directory>
+									<directory>/var/lib/jenkins/workspace/PipelineSpringYAngularJenkinsfile/dist</directory>
 								</resource>
 							</resources>
 						</configuration>
