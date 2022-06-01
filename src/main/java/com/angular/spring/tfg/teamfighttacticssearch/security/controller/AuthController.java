@@ -46,6 +46,11 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
+    @GetMapping("/testDeploy/{name}")
+    public String testDeploy(@PathVariable("name") String name){
+        return "HOLA " + name;
+    }
+
     @PostMapping("/new")
     public ResponseEntity<?> newUser(@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors()){

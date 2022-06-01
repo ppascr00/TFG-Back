@@ -21,11 +21,6 @@ public class rankingController {
     @Autowired
     private RankingService rankingService;
 
-    @GetMapping("/testDeploy/{name}")
-    public String testDeploy(@PathVariable("name") String name){
-        return "HOLA " + name;
-    }
-
     //leaderboard?platform=euw1
     @PostMapping("/leaderboard")
     public ResponseEntity<List<LeagueItemDTO>> getChallengerList(@RequestParam(value = "platform") String platform){
