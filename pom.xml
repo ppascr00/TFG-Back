@@ -89,7 +89,7 @@
 							<outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
 							<resources>
 								<resource>
-									<directory>/var/lib/jenkins/workspace/PipelineSpringYAngularJenkinsfile/dist</directory>
+									<directory>/var/lib/jenkins/workspace/AngularJenkinsfile/dist</directory>
 								</resource>
 							</resources>
 						</configuration>
