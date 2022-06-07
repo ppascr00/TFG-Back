@@ -4,12 +4,10 @@ import com.angular.spring.tfg.teamfighttacticssearch.beans.LeagueItemDTO;
 import com.angular.spring.tfg.teamfighttacticssearch.beans.LeagueListDTO;
 import com.angular.spring.tfg.teamfighttacticssearch.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,17 +19,12 @@ public class rankingController {
     @Autowired
     private RankingService rankingService;
 
-    //leaderboard?platform=euw1
     @PostMapping("/leaderboard")
     public ResponseEntity<List<LeagueItemDTO>> getChallengerList(@RequestParam(value = "platform") String platform){
 
         LeagueListDTO leagueListDTOChallenger = rankingService.getLeaderboard(platform, "challenger");
-        LeagueListDTO leagueListDTOGrandmaster = rankingService.getLeaderboard(platform, "grandmaster");
-        LeagueListDTO leagueListDTOMaster = rankingService.getLeaderboard(platform, "master");
 
         List<LeagueItemDTO> leagueItemDTO = leagueListDTOChallenger.getEntries();
-        leagueItemDTO.addAll(leagueListDTOGrandmaster.getEntries());
-        leagueItemDTO.addAll(leagueListDTOMaster.getEntries());
 
         leagueItemDTO = orderLeagueItemDTO(leagueItemDTO);
 

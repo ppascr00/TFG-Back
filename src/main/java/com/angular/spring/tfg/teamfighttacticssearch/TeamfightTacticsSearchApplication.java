@@ -2,7 +2,6 @@ package com.angular.spring.tfg.teamfighttacticssearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
@@ -16,11 +15,6 @@ public class TeamfightTacticsSearchApplication extends SpringBootServletInitiali
 
 	public static void main(String[] args) {
 		SpringApplication.run(TeamfightTacticsSearchApplication.class, args);
-	}
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TeamfightTacticsSearchApplication.class);
 	}
 
 	@Bean

@@ -27,11 +27,13 @@ public class UserNameSearchServiceImpl implements UserNameSearchService {
 
     @Override
     public List<UsernameInfoMatch> getSummonerInfo(String platform, String summonerName) {
-        SummonerDTO summonerDTO = restTemplate.getForObject("https://"+ platform +".api.riotgames.com/tft/summoner/v1/summoners/by-name/"+ summonerName +"?api_key="+ apiKey, SummonerDTO.class);
+        SummonerDTO summonerDTO = restTemplate.getForObject("https://"+ platform +".api.riotgames.com/tft/summoner/v1/summoners/by-name/"
+                + summonerName +"?api_key="+ apiKey, SummonerDTO.class);
         String puuid = summonerDTO.getPuuid();
         String region = getRegion(platform);
 
-        List<String> listMatches = restTemplate.getForObject("https://"+ region +".api.riotgames.com/tft/match/v1/matches/by-puuid/"+ puuid +"/ids?count=20&api_key=" + apiKey, List.class);
+        List<String> listMatches = restTemplate.getForObject("https://"+ region +".api.riotgames.com/tft/match/v1/matches/by-puuid/"
+                + puuid +"/ids?count=20&api_key=" + apiKey, List.class);
         List<MatchDTO> listMatchesInfo = new ArrayList();
         getListMatchesInfo(region, listMatches, listMatchesInfo);
 
@@ -44,7 +46,8 @@ public class UserNameSearchServiceImpl implements UserNameSearchService {
 
     private void getListMatchesInfo(String region, List<String> listMatches, List<MatchDTO> listMatchesInfo) {
         for(int i = 0; i< listMatches.size(); i++){
-            MatchDTO matchDTO = restTemplate.getForObject("https://"+ region +".api.riotgames.com/tft/match/v1/matches/"+ listMatches.get(i) +"?api_key=" + apiKey, MatchDTO.class);
+            MatchDTO matchDTO = restTemplate.getForObject("https://"+ region +".api.riotgames.com/tft/match/v1/matches/"
+                    + listMatches.get(i) +"?api_key=" + apiKey, MatchDTO.class);
             listMatchesInfo.add(matchDTO);
         }
     }
@@ -66,7 +69,8 @@ public class UserNameSearchServiceImpl implements UserNameSearchService {
     private void getUsernameInfo(String puuid, List<MatchDTO> listMatchesInfo, List<UsernameInfoMatch> usernameInfoMatches) {
         listMatchesInfo.forEach(s -> {
             UsernameInfoMatch usernameInfoMatch = new UsernameInfoMatch();
-            usernameInfoMatch.setPosition(s.getInfo().getParticipants().stream().filter(participantDTO -> participantDTO.getPuuid().equals(puuid)).findFirst().get().getPlacement());
+            usernameInfoMatch.setPosition(s.getInfo().getParticipants().stream().filter(participantDTO ->
+                    participantDTO.getPuuid().equals(puuid)).findFirst().get().getPlacement());
 
             float seconds = s.getInfo().getGame_length();
             usernameInfoMatch.setGameLength(calculateTime((long) seconds));
@@ -81,11 +85,10 @@ public class UserNameSearchServiceImpl implements UserNameSearchService {
     }
 
     private String calculateTime(long seconds) {
-        String horasMinutos = String.format("%d min, %d sec",
+        return String.format("%d min, %d sec",
                 TimeUnit.SECONDS.toMinutes(seconds),
                 TimeUnit.SECONDS.toSeconds(seconds) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(seconds))
         );
-        return horasMinutos;
     }
 }

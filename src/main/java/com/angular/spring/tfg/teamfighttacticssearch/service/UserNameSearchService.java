@@ -1,6 +1,5 @@
 package com.angular.spring.tfg.teamfighttacticssearch.service;
 
-import com.angular.spring.tfg.teamfighttacticssearch.beans.MatchDTO;
 import com.angular.spring.tfg.teamfighttacticssearch.beans.UsernameInfoMatch;
 
 import java.util.List;
