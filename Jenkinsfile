@@ -40,4 +40,15 @@ node {
    // ------------------------------------
    stage 'Deploy'
    deploy adapters: [tomcat9(credentialsId: '5a41b19c-b032-4563-8c2d-0b4d2247ca4b', path: '', url: 'http://localhost:8081')], contextPath: '/teamfighttacticssearch', war: '**/*.war'
+
+   notifySuccessful()
+}
+
+def notifySuccessful() {
+   emailext (
+           subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+           body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+           recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+   )
 }
